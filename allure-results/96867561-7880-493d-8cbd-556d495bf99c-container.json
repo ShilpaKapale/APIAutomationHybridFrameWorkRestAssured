@@ -1,0 +1,1 @@
+{"uuid":"96867561-7880-493d-8cbd-556d495bf99c","name":"APIAutomationFrameWorkRAHybrid","children":["f6348e0a-dc08-4ec6-a609-ae6144894ceb"],"befores":[{"name":"setUp","status":"passed","stage":"finished","description":"","steps":[],"attachments":[],"parameters":[],"start":1734614069021,"stop":1734614069840}],"afters":[],"start":1734614069002,"stop":1734614073173}
