@@ -9,7 +9,7 @@ import io.restassured.response.Response;
 import org.testng.annotations.Test;
 
 public class testCreateBooking extends BaseTest {
-
+//Create Booking
     @Owner("Promode")
     @TmsLink("https://google.com")
     @Link(name = "Link to TC", url = "https://bugz.atlassian.net/browse/RBT-4")
