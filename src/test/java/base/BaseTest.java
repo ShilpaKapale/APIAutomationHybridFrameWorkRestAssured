@@ -38,4 +38,17 @@ public void setUp(){
 //            .addHeader("Content-Type", "application/json")
 //            .build().log().all();
 }
+        //Below function make a post request and will give token
+    public String getToken(){
+        requestSpecification = RestAssured.given()
+                .baseUri(APIConstants.BASE_URL)
+                .basePath(APIConstants.AUTH_URL);
+        //Setting payload
+        String payload = payLoadManager.setAuthPayload();
+        //Get token
+        response = requestSpecification.contentType(ContentType.JSON).body(payload).when().post();
+        //String extraction
+        String token = payLoadManager.getTokenFromJSON(response.asString());
+        return token;
+    }
 }
