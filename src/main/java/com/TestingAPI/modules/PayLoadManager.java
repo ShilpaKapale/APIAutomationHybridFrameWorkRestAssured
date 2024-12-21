@@ -52,34 +52,40 @@ public class PayLoadManager {
     //JSON to JAVA - serialization
 
     public String setAuthPayload(){
+        System.out.println("setAuthPayload start");
         Auth auth = new Auth();
         auth.setUsername("admin");
         auth.setPassword("password123");
         gson = new Gson();
         String jsonPayloadString = gson.toJson(auth);
-        System.out.println(jsonPayloadString);
+        System.out.println("Payload set to the -> " + jsonPayloadString);
+        System.out.println("setAuthPayload end");
         return jsonPayloadString;
     }
     // Java to JSON - deserialization
 
+
     public String getTokenFromJSON(String tokenResponse){
         gson = new Gson();
-        TokenResponse tokenResponse1 = gson.fromJson(tokenResponse, TokenResponse.class);
+        TokenResponse tokenResponse1  = gson.fromJson(tokenResponse, TokenResponse.class);
         return tokenResponse1.getToken();
-    }
 
+    }
     public String fullUpdatePayloadAsString(){
+        System.out.println("fullUpdatePayloadAsString start");
         Booking booking = new Booking();
         booking.setFirstname("Priya");
         booking.setLastname("Dutta");
         booking.setTotalprice(122);
         booking.setDepositpaid(true);
 
-        Bookingdates bookingdates = new Bookingdates();
-        bookingdates.setCheckin("2024-02-01");
-        bookingdates.setCheckin("2024-02-05");
-        booking.setBookingdates(bookingdates);
+        Bookingdates bookingdate = new Bookingdates();
+        bookingdate.setCheckin("2024-02-01");
+        bookingdate.setCheckout("2024-02-05");
+        booking.setBookingdates(bookingdate);
         booking.setAdditionalneeds("Breakfast");
+        System.out.println("fullUpdatePayloadAsString end");
         return gson.toJson(booking);
+
     }
 }

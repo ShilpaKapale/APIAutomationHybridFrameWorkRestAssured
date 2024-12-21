@@ -23,6 +23,7 @@ public class TestIntegrationFlow extends BaseTest {
 
     // 2. Create Token -> token
 
+
     // 3. Verify that the Create Booking is working - GET Request to bookingID
 
     // 4. Update the booking ( bookingID, Token) - Need to get the token, bookingID from above request
@@ -58,10 +59,12 @@ public class TestIntegrationFlow extends BaseTest {
     @Owner("Shilpa")
     @Description("Verify  the booking ID ")
     public void testVerifyBookingID(ITestContext iTestContext){
-        System.out.println(iTestContext.getAttribute("bookingid"));
+        System.out.println(iTestContext.getAttribute("Booking id is: " + "bookingid"));
+
         Assert.assertTrue(true);
 
         Integer bookingid = (Integer) iTestContext.getAttribute("bookingid");
+        System.out.println("booking id after integer is" + bookingid);
         String basePathGET = APIConstants.CREATE_UPDATE_BOOKING_URL+"/" + bookingid;
         System.out.println(basePathGET);
 
@@ -83,24 +86,25 @@ public class TestIntegrationFlow extends BaseTest {
     @Description("Verify Update booking details")
     public void testUpdateBookingByID(ITestContext iTestContext){
 
-        System.out.println(iTestContext.getAttribute("bookingid"));
-
+//      System.out.println(iTestContext.getAttribute("For updating name Booking ID is -> " + "bookingid"));
 
         Integer bookingid = (Integer) iTestContext.getAttribute("bookingid");
+        System.out.println("Check booking id Integer: "+bookingid);
         String token = getToken();
+        System.out.println("Token is:" +token);
         //When we get token we need to set token to token so that we can share to everyone as need to give to delete
         iTestContext.setAttribute("token",token);
 
         //Now we have to perform put/update request
-        String basepathPUTPATCH = APIConstants.CREATE_UPDATE_BOOKING_URL + "/" + bookingid;
-        System.out.println(basepathPUTPATCH);
+        String basePathPUTPATCH = APIConstants.CREATE_UPDATE_BOOKING_URL + "/" + bookingid;
+        System.out.println("URL for updating request is: "+basePathPUTPATCH);
 
-        requestSpecification.basePath(basepathPUTPATCH);
+        requestSpecification.basePath(basePathPUTPATCH);
 
         response = RestAssured
                 .given(requestSpecification).cookie("token",token)
                         .when().body(payLoadManager.fullUpdatePayloadAsString()).put();
-
+        //System.out.println(response);
 //Verify response and status code
         validatableResponse = response.then().log().all();
         validatableResponse.statusCode(200);
@@ -108,12 +112,12 @@ public class TestIntegrationFlow extends BaseTest {
         //here below payLoadManager is from BaseTest
         //Verify Name is correct on updating
         Booking booking = payLoadManager.getResponseFromJSON(response.asString());
-
+        System.out.println("Verify after updating");
         assertThat(booking.getFirstname()).isNotNull().isNotBlank();
         assertThat(booking.getFirstname()).isEqualTo("Priya");
         assertThat(booking.getLastname()).isEqualTo("Dutta");
-
-        Assert.assertTrue(true);
+        System.out.println("End of update");
+       // Assert.assertTrue(true);
 
 
     }
