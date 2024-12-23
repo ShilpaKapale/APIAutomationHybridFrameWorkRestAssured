@@ -137,11 +137,6 @@ public class TestIntegrationFlow extends BaseTest {
                         .when().delete().then().log().all();
         validatableResponse.statusCode(201);
 
-
-
-
-
-
         Assert.assertTrue(true);
     }
 }
